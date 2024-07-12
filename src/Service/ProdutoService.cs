@@ -21,10 +21,6 @@ public class ProdutoService : IProdutoService
         throw new NotImplementedException();
     }
 
-    public Task<bool> DesativaProduto(int id)
-    {
-        return _produtoRepository.DesativaProduto(id);
-    }
 
     public Task<Produto> Get(int id)
     {

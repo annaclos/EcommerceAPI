@@ -9,5 +9,4 @@ public interface IProdutoRepository
     Task<Produto> Update(Produto produto);
     Task<bool> Delete(int id);
     Task<List<Produto>> List();
-    Task<bool> DesativaProduto(int id);
 }
