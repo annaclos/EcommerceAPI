@@ -15,11 +15,6 @@ namespace ecommerceApi.src.Repository
             throw new NotImplementedException();
         }
 
-        public Task<bool> DesativaProduto(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<Produto> Get(int id)
         {
             throw new NotImplementedException();
