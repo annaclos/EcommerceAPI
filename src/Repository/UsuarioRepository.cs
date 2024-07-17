@@ -1,6 +1,7 @@
 ﻿using ecommerceApi.Model;
 using ecommerceApi.src.Base.DataBase;
 using ecommerceApi.src.Contracts.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace ecommerceApi.src.Repository;
 
@@ -10,7 +11,7 @@ public class UsuarioRepository : IUsuarioRepository
     public UsuarioRepository(DataContext context)
     {
         _context = context;
-        
+
     }
     public async Task<Usuario> Create(Usuario usuario)
     {
@@ -19,23 +20,38 @@ public class UsuarioRepository : IUsuarioRepository
         return usuario;
     }
 
-    public Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        var deleteUser = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+        if (deleteUser == null)
+            throw new Exception("Usuário nao encontrado");
+
+        _context.Remove(deleteUser);
+        return await _context.SaveChangesAsync() == 1;
     }
 
-    public Task<Usuario> Get(int id)
+    public async Task<Usuario> Get(int id)
     {
-        throw new NotImplementedException();
+        var usuarioGet = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+        if (usuarioGet != null)
+        {
+            return usuarioGet;
+        }
+        else
+        {
+            throw new Exception("Usuário não cadastrado");
+        }
     }
 
-    public Task<List<Usuario>> List()
+    public async Task<List<Usuario>> List()
     {
-        throw new NotImplementedException();
+        return await _context.Usuarios.ToListAsync();
     }
 
-    public Task<Usuario> Update(Usuario usuario)
+    public async Task<Usuario> Update(Usuario usuario)
     {
-        throw new NotImplementedException();
+        _context.Update(usuario);
+        await _context.SaveChangesAsync();
+        return usuario;
     }
 }

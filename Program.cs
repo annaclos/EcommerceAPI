@@ -1,6 +1,11 @@
 using ecommerceApi.src.Base.DataBase;
 using ecommerceApi.src.Base.Middleware;
+using ecommerceApi.src.Contracts.Repository;
+using ecommerceApi.src.Contracts.Service;
+using ecommerceApi.src.Repository;
+using ecommerceApi.src.Service;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +18,13 @@ builder.Services.AddSwaggerGen();
 
 AppSettings.LoadSettings(builder.Configuration);
 builder.Services.AddDbContext<DataContext>(x => x.UseNpgsql(AppSettings.ConnectionString));
+
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IProdutoService,  ProdutoService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 
 var app = builder.Build();

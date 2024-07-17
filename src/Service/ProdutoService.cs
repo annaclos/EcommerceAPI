@@ -16,25 +16,24 @@ public class ProdutoService : IProdutoService
         return await _produtoRepository.Create(produto);
     }
 
-    public Task<bool> Delete(int id)
+    public async Task<bool> Delete(int id)
     {
-        throw new NotImplementedException();
+        return await _produtoRepository.Delete(id);
     }
 
-
-    public Task<Produto> Get(int id)
+    public async Task<Produto> Get(int id)
     {
-        throw new NotImplementedException();
+        return await _produtoRepository.Get(id);
     }
 
-    public Task<List<Produto>> List()
+    public async Task<List<Produto>> List()
     {
-        throw new NotImplementedException();
+        return await _produtoRepository.List();
     }
 
-    public Task<Produto> Update(Produto produto)
+    public async Task<Produto> Update(Produto produto)
     {
-        throw new NotImplementedException();
+        return await _produtoRepository.Update(produto);
     }
 
 }
