@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace ecommerceApi.Model;
 
@@ -29,6 +31,7 @@ public class Endereco : BaseEntity
     #region Relacionamento
 
     public int UsuarioId { get; set; }
+    [XmlIgnore, JsonIgnore]
     public Usuario? Usuario { get; set; }
 
     #endregion
