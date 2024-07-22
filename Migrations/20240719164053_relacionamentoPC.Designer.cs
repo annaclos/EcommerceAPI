@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ecommerceApi.src.Base.DataBase;
@@ -11,9 +12,11 @@ using ecommerceApi.src.Base.DataBase;
 namespace ecommerceApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240719164053_relacionamentoPC")]
+    partial class relacionamentoPC
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,58 +45,6 @@ namespace ecommerceApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categorias");
-                });
-
-            modelBuilder.Entity("ecommerceApi.Model.Endereco", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Cep")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("District")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("Number")
-                        .IsRequired()
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Reference")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Uf")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("character varying(2)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("ecommerceApi.Model.Produto", b =>
@@ -185,17 +136,6 @@ namespace ecommerceApi.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("ecommerceApi.Model.Endereco", b =>
-                {
-                    b.HasOne("ecommerceApi.Model.Usuario", "Usuario")
-                        .WithMany("Endereco")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("ecommerceApi.Model.Produto", b =>
                 {
                     b.HasOne("ecommerceApi.Model.Categoria", "Categoria")
@@ -208,11 +148,6 @@ namespace ecommerceApi.Migrations
             modelBuilder.Entity("ecommerceApi.Model.Categoria", b =>
                 {
                     b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("ecommerceApi.Model.Usuario", b =>
-                {
-                    b.Navigation("Endereco");
                 });
 #pragma warning restore 612, 618
         }

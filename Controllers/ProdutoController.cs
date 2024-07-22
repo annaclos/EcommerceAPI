@@ -6,7 +6,7 @@ namespace ecommerceApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProdutoController(IProdutoService _service) : Controller
+    public class ProdutoController(IProdutoService _service) : ControllerBase
     {
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)

@@ -9,5 +9,7 @@ public class Produto : BaseEntity
     public decimal? Price { get; set; }
     public string? Image { get; set; }
     public int Amount { get; set; }
+    public int? CategoriaId { get; set; }
+    public Categoria? Categoria { get; set; }
 
 }

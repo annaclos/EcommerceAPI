@@ -18,4 +18,8 @@ public class Usuario : BaseEntity
     [DefaultValue(true)]
     public bool Active { get; set; } = true;
 
+    #region relacionamento
+    public IEnumerable<Endereco>? Endereco { get; set; }
+
+    #endregion
 }

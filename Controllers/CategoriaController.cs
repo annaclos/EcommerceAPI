@@ -6,7 +6,7 @@ namespace ecommerceApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoriaController(ICategoriaService _service) : Controller
+    public class CategoriaController(ICategoriaService _service) : ControllerBase
     {
 
         [HttpDelete("{id}")]

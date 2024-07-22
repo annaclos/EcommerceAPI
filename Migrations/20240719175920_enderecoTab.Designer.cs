@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ecommerceApi.src.Base.DataBase;
@@ -11,9 +12,11 @@ using ecommerceApi.src.Base.DataBase;
 namespace ecommerceApi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240719175920_enderecoTab")]
+    partial class enderecoTab
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,12 +89,7 @@ namespace ecommerceApi.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Enderecos");
                 });
@@ -185,17 +183,6 @@ namespace ecommerceApi.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("ecommerceApi.Model.Endereco", b =>
-                {
-                    b.HasOne("ecommerceApi.Model.Usuario", "Usuario")
-                        .WithMany("Endereco")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("ecommerceApi.Model.Produto", b =>
                 {
                     b.HasOne("ecommerceApi.Model.Categoria", "Categoria")
@@ -208,11 +195,6 @@ namespace ecommerceApi.Migrations
             modelBuilder.Entity("ecommerceApi.Model.Categoria", b =>
                 {
                     b.Navigation("Produtos");
-                });
-
-            modelBuilder.Entity("ecommerceApi.Model.Usuario", b =>
-                {
-                    b.Navigation("Endereco");
                 });
 #pragma warning restore 612, 618
         }
