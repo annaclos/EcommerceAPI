@@ -1,4 +1,5 @@
 ﻿using ecommerceApi.Model;
+using ecommerceApi.src.Base.Util;
 using ecommerceApi.src.Contracts.Repository;
 using ecommerceApi.src.Contracts.Service;
 
@@ -8,6 +9,7 @@ public class UsuarioService(IUsuarioRepository _usuarioRepository) : IUsuarioSer
 {
     public async Task<Usuario> Create(Usuario usuario)
     {
+        usuario.SetHashPassword();
         return await _usuarioRepository.Create(usuario);
     }
 
